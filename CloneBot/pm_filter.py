@@ -30,12 +30,20 @@ SPELL_CHECK = {}
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
+    try:
+        await message.react(emoji=random.choice(REACTIONS))
+    except Exception:
+        pass
     ai_search = True
     reply_msg = await message.reply_text(f"<b><i>Searching For {message.text} 🔍</i></b>")
     await auto_filter(client, message.text, message, reply_msg, ai_search)
             
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
+    try:
+        await message.react(emoji=random.choice(REACTIONS))
+    except Exception:
+        pass
     content = message.text
     user = message.from_user.first_name
     user_id = message.from_user.id
@@ -72,23 +80,23 @@ async def next_page(bot, query):
     btn = [
         [
             InlineKeyboardButton(
-                text=f"[{get_size(filevj['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), filevj['file_name'].split()))}", callback_data=f"file#{filevj['file_id']}"
+                text=f"⚡[{get_size(file['file_size'])}]⚡ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}", callback_data=f"file#{file['file_id']}"
             ),
         ]
-        for filevj in files
+        for file in files
     ]
 
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
-            InlineKeyboardButton("ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
-            InlineKeyboardButton("sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            InlineKeyboardButton(f'👓ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("🎬ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
+            InlineKeyboardButton("🤸sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
         ]
     )
     btn.insert(0, [
-        InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
-        InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-        InlineKeyboardButton("ʏᴇᴀʀs", callback_data=f"years#{key}")
+        InlineKeyboardButton("💣𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
+        InlineKeyboardButton("🔤ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+        InlineKeyboardButton("🗓️ʏᴇᴀʀs", callback_data=f"years#{key}")
     ])
     if 0 < offset <= int(MAX_B_TN):
         off_set = 0
@@ -152,7 +160,7 @@ async def years_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=True,
             )
     except:
@@ -205,7 +213,7 @@ async def filter_yearss_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(req) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=True,
             )
     except:
@@ -222,22 +230,22 @@ async def filter_yearss_cb_handler(client: Client, query: CallbackQuery):
     btn = [
         [
             InlineKeyboardButton(
-                text=f"[{get_size(filevj['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), filevj['file_name'].split()))}", callback_data=f"file#{filevj['file_id']}"
+                text=f"⚡[{get_size(file['file_size'])}]⚡ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}", callback_data=f"file#{file['file_id']}"
             ),
         ]
-        for filevj in files
+        for file in files
     ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
-            InlineKeyboardButton("ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
-            InlineKeyboardButton("sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            InlineKeyboardButton(f'👓ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("🎬ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
+            InlineKeyboardButton("🤸sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
         ]
     )
     btn.insert(0, [
-        InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
-        InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-        InlineKeyboardButton("ʏᴇᴀʀs", callback_data=f"years#{key}")
+        InlineKeyboardButton("💣𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
+        InlineKeyboardButton("🔤ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+        InlineKeyboardButton("🗓️ʏᴇᴀʀs", callback_data=f"years#{key}")
     ])
     if offset != "":
         btn.append(
@@ -264,7 +272,7 @@ async def episodes_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=True,
             )
     except:
@@ -317,7 +325,7 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(req) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=True,
             )
     except:
@@ -334,22 +342,22 @@ async def filter_episodes_cb_handler(client: Client, query: CallbackQuery):
     btn = [
         [
             InlineKeyboardButton(
-                text=f"[{get_size(filevj['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), filevj['file_name'].split()))}", callback_data=f"file#{filevj['file_id']}"
+                text=f"⚡[{get_size(file['file_size'])}]⚡ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}", callback_data=f"file#{file['file_id']}"
             ),
         ]
-        for filevj in files
+        for file in files
     ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
-            InlineKeyboardButton("ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
-            InlineKeyboardButton("sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            InlineKeyboardButton(f'👓ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("🎬ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
+            InlineKeyboardButton("🤸sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
         ]
     )
     btn.insert(0, [
-        InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
-        InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-        InlineKeyboardButton("ʏᴇᴀʀs", callback_data=f"years#{key}")
+        InlineKeyboardButton("💣𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
+        InlineKeyboardButton("🔤ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+        InlineKeyboardButton("🗓️ʏᴇᴀʀs", callback_data=f"years#{key}")
     ])
     if offset != "":
         btn.append(
@@ -378,7 +386,7 @@ async def languages_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=True,
             )
     except:
@@ -431,7 +439,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(req) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=True,
             )
     except:
@@ -448,22 +456,22 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     btn = [
         [
             InlineKeyboardButton(
-                text=f"[{get_size(filevj['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), filevj['file_name'].split()))}", callback_data=f"file#{filevj['file_id']}"
+                text=f"⚡[{get_size(file['file_size'])}]⚡ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}", callback_data=f"file#{file['file_id']}"
             ),
         ]
-        for filevj in files
+        for file in files
     ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
-            InlineKeyboardButton("ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
-            InlineKeyboardButton("sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            InlineKeyboardButton(f'👓ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("🎬ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
+            InlineKeyboardButton("🤸sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
         ]
     )
     btn.insert(0, [
-        InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
-        InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-        InlineKeyboardButton("ʏᴇᴀʀs", callback_data=f"years#{key}")
+        InlineKeyboardButton("💣𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
+        InlineKeyboardButton("🔤ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+        InlineKeyboardButton("🗓️ʏᴇᴀʀs", callback_data=f"years#{key}")
     ])
     if offset != "":
         btn.append(
@@ -488,7 +496,7 @@ async def seasons_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்..",
                 show_alert=True,
             )
     except:
@@ -549,7 +557,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(req) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=True,
             )
     except:
@@ -589,22 +597,22 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     btn = [
         [
             InlineKeyboardButton(
-                text=f"[{get_size(filevj['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), filevj['file_name'].split()))}", callback_data=f"file#{filevj['file_id']}"
+                text=f"⚡[{get_size(file['file_size'])}]⚡ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}", callback_data=f"file#{file['file_id']}"
             ),
         ]
-        for filevj in files
+        for file in files
     ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
-            InlineKeyboardButton("ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
-            InlineKeyboardButton("sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            InlineKeyboardButton(f'👓ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("🎬ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
+            InlineKeyboardButton("🤸sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
         ]
     )
     btn.insert(0, [
-        InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
-        InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-        InlineKeyboardButton("ʏᴇᴀʀs", callback_data=f"years#{key}")
+        InlineKeyboardButton("💣𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
+        InlineKeyboardButton("🔤ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+        InlineKeyboardButton("🗓️ʏᴇᴀʀs", callback_data=f"years#{key}")
     ])   
     offset = 0
 
@@ -627,7 +635,7 @@ async def qualities_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(query.from_user.id) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்...",
                 show_alert=False,
             )
     except:
@@ -652,7 +660,7 @@ async def qualities_cb_handler(client: Client, query: CallbackQuery):
         0,
         [
             InlineKeyboardButton(
-                text="⇊ ꜱᴇʟᴇᴄᴛ ʏᴏᴜʀ ǫᴜᴀʟɪᴛʏ ⇊", callback_data="ident"
+                text="⇊ ꜱᴇʟᴇᴄᴛ ʏᴏᴜʀ 👓ǫᴜᴀʟɪᴛʏ ⇊", callback_data="ident"
             )
         ],
     )
@@ -679,7 +687,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
     try:
         if int(req) not in [query.message.reply_to_message.from_user.id, 0]:
             return await query.answer(
-                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ...",
+                f"⚠️ ʜᴇʟʟᴏ{query.from_user.first_name},\nᴛʜɪꜱ ɪꜱ ɴᴏᴛ ʏᴏᴜʀ ᴍᴏᴠɪᴇ ʀᴇQᴜᴇꜱᴛ,\nʀᴇQᴜᴇꜱᴛ ʏᴏᴜʀ'ꜱ\n\n⚠️ வணக்கம்,\n இது உங்கள் கோரிக்கை அல்ல,\n உங்கள் கோரிக்கையை கோருங்கள்..",
                 show_alert=False,
             )
     except:
@@ -697,22 +705,22 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
     btn = [
         [
             InlineKeyboardButton(
-                text=f"⚜️[{get_size(filevj['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), filevj['file_name'].split()))}", callback_data=f"file#{filevj['file_id']}"
+                text=f"⚡[{get_size(file['file_size'])}]⚡ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}", callback_data=f"file#{file['file_id']}"
             ),
         ]
-        for filevj in files
+        for file in files
     ] 
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
-            InlineKeyboardButton("ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
-            InlineKeyboardButton("sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            InlineKeyboardButton(f'👓ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("🎬ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
+            InlineKeyboardButton("🤸sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
         ]
     )
     btn.insert(0, [
-        InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
-        InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-        InlineKeyboardButton("ʏᴇᴀʀs", callback_data=f"years#{key}")
+        InlineKeyboardButton("💣𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
+        InlineKeyboardButton("🔤ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+        InlineKeyboardButton("🗓️ʏᴇᴀʀs", callback_data=f"years#{key}")
     ])
 
     if offset != "":
@@ -891,22 +899,22 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
     btn = [
         [
             InlineKeyboardButton(
-                text=f"[{get_size(filevj['file_size'])}] {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), filevj['file_name'].split()))}", callback_data=f"file#{filevj['file_id']}"
+                text=f"⚡[{get_size(file['file_size'])}]⚡ {' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@') and not x.startswith('www.'), file['file_name'].split()))}", callback_data=f"file#{file['file_id']}"
             ),
         ]
-        for filevj in files
+        for file in files
     ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
-            InlineKeyboardButton("ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
-            InlineKeyboardButton("sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
+            InlineKeyboardButton(f'👓ǫᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("🎬ᴇᴘɪsᴏᴅᴇs", callback_data=f"episodes#{key}"),
+            InlineKeyboardButton("🤸sᴇᴀsᴏɴs",  callback_data=f"seasons#{key}")
         ]
     )
     btn.insert(0, [
-        InlineKeyboardButton("𝐒𝐞𝐧𝐝 𝐀𝐥𝐥", callback_data=f"sendfiles#{key}"),
-        InlineKeyboardButton("ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
-        InlineKeyboardButton("ʏᴇᴀʀs", callback_data=f"years#{key}")
+        InlineKeyboardButton("💣𝐒𝐞𝐧𝐝 𝐀𝐥𝐥�", callback_data=f"sendfiles#{key}"),
+        InlineKeyboardButton("🔤ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}"),
+        InlineKeyboardButton("🗓️ʏᴇᴀʀs", callback_data=f"years#{key}")
     ])
     if offset != "":
         req = message.from_user.id if message.from_user else 0
@@ -956,7 +964,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
         )
         temp.IMDB_CAP[message.from_user.id] = cap
     else:
-        cap = f"<b>Tʜᴇ Rᴇꜱᴜʟᴛꜱ Fᴏʀ ☞ {search}\n\nRᴇǫᴜᴇsᴛᴇᴅ Bʏ ☞ {message.from_user.mention}\n\nʀᴇsᴜʟᴛ sʜᴏᴡ ɪɴ ☞ {remaining_seconds} sᴇᴄᴏɴᴅs\n\nᴘᴏᴡᴇʀᴇᴅ ʙʏ ☞ : {message.chat.title} \n\n⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️\n\n</b>"
+        cap = f"<b>🎪 ᴛɪᴛɪʟᴇ : {search}\n\n┏🤴ᴀsᴋᴇᴅʙʏ: {message.from_user.mention}\n┣⏳ʀᴇsᴜʟᴛ sʜᴏᴡ ɪɴ: {remaining_seconds} sᴇᴄ\n┗🍁 ᴄʜᴀɴɴᴇʟ: {message.chat.title} \n\n<blockquote>⚠️ ᴀꜰᴛᴇʀ 5 ᴍɪɴᴜᴛᴇꜱ ᴛʜɪꜱ ᴍᴇꜱꜱᴀɢᴇ ᴡɪʟʟ ʙᴇ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴅᴇʟᴇᴛᴇᴅ 🗑️</blockquote>\n\n⚡ᴘᴏᴡᴇʀᴇᴅ ʙʏ : @TamilMovies5K\n</b>"
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
@@ -984,7 +992,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
         await fuk.delete()
         await message.delete()
 
-async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
+async def advantage_spell_chok(client, name, msg, reply_msg, sk_search):
     mv_id = msg.id
     mv_rqst = name
     reqstr1 = msg.from_user.id if msg.from_user else 0
@@ -1018,9 +1026,9 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
     movielist += [movie.get('title') for movie in movies]
     movielist += [f"{movie.get('title')} {movie.get('year')}" for movie in movies]
     SPELL_CHECK[mv_id] = movielist
-    if vj_search == True:
-        vj_search_new = False
-        vj_ai_msg = await reply_msg.edit_text("<b><i>Advance Ai Of Tech VJ Try To Find Your Movie With Your Wrong Spelling.</i></b>")
+    if sk_search == True:
+        sk_search_new = False
+        sk_ai_msg = await reply_msg.edit_text("<b><i>Tamilni Ai Of Tech VJ Try To Find Your Movie With Your Wrong Spelling.</i></b>")
         movienamelist = []
         movienamelist += [movie.get('title') for movie in movies]
         for techvj in movienamelist:
