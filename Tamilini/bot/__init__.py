@@ -12,7 +12,7 @@ from pyrogram import Client
 from info import *
 
 
-class TamiliniXBot(Client):
+class TamilXBot(Client):
 
     def __init__(self):
         super().__init__(
