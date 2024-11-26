@@ -6,7 +6,7 @@ import asyncio
 import logging
 from info import *
 from pyrogram import Client
-from TechVJ.util.config_parser import TokenParser
+from Tamilini.util.config_parser import TokenParser
 from Tamilini.bot import multi_clients, work_loads, TamiliniBot
 
 
