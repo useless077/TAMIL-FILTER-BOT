@@ -1,6 +1,6 @@
 import jinja2
 from info import *
-from Tamilini.bot import TechVJBot
+from Tamilini.bot import TamiliniBot
 from Tamilini.util.human_readable import humanbytes
 from Tamilini.util.file_properties import get_file_ids
 from Tamilini.server.exceptions import InvalidHash
@@ -10,7 +10,7 @@ import aiohttp
 
 
 async def render_page(id, secure_hash, src=None):
-    file = await TechVJBot.get_messages(int(LOG_CHANNEL), int(id))
+    file = await TamiliniBot.get_messages(int(LOG_CHANNEL), int(id))
     file_data = await get_file_ids(TamiliniBot, int(LOG_CHANNEL), int(id))
     if file_data.unique_id[:6] != secure_hash:
         logging.debug(f"link hash: {secure_hash} - {file_data.unique_id[:6]}")
