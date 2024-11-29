@@ -35,8 +35,8 @@ SPELL_CHECK = {}
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message)
     try:
-        await message.react(emoji=random.choice(REACTIONS), big=True)
-    except:
+        await message.react(emoji=random.choice(EMOJIS), big=True)
+    except Exception:
         pass
     if message.chat.id != SUPPORT_CHAT_ID:
         settings = await get_settings(message.chat.id)
@@ -81,7 +81,7 @@ async def give_filter(client, message)
 async def pm_text(bot, message):
     try:
         await message.react(emoji=random.choice(REACTIONS), big=True)
-    except:
+    except Exception:
         pass
     content = message.text
     user = message.from_user.first_name
