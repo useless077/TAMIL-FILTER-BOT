@@ -1,6 +1,7 @@
-# Don't Remove Credit @sk_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_sk
-# Ask Doubt on telegram @Kingsk01
+# Don't Remove Credit @TamilBots
+# Subscribe YouTube Channel For Amazing Bot @TamilBots
+# Ask Doubt on telegram @TamilSupport
+#Join our Movie channel @TownBus
 
 import logging, re, asyncio
 from utils import temp
