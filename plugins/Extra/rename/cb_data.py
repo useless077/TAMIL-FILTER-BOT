@@ -1,6 +1,7 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
+# Don't Remove Credit @TamilBots
+# Subscribe YouTube Channel For Amazing Bot @TamilBots
+# Ask Doubt on telegram @TamilSupport
+#Join our Movie channel @TownBus
 
 from plugins.Extra.utils import progress_for_pyrogram, convert, humanbytes
 from pyrogram import Client, filters
