@@ -1,6 +1,7 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @MovieDiscussion24x7
+# Don't Remove Credit @TamilBots
+# Subscribe YouTube Channel For Amazing Bot @TamilBots
+# Ask Doubt on telegram @TamilSupport
+#Join our Movie channel @TownBus
 
 import os, string, logging, random, asyncio, time, datetime, re, sys, json, base64
 from Script import script
@@ -172,10 +173,10 @@ async def start(client, message):
         )
         return
     data = message.command[1]
-    if data.split("-", 1)[0] == "VJ":
+    if data.split("-", 1)[0] == "SK":
         user_id = int(data.split("-", 1)[1])
-        vj = await referal_add_user(user_id, message.from_user.id)
-        if vj and PREMIUM_AND_REFERAL_MODE == True:
+        sk = await referal_add_user(user_id, message.from_user.id)
+        if sk and PREMIUM_AND_REFERAL_MODE == True:
             await message.reply(f"<b>You have joined using the referral link of user with ID {user_id}\n\nSend /start again to use the bot</b>")
             num_referrals = await get_referal_users_count(user_id)
             await client.send_message(chat_id = user_id, text = "<b>{} start the bot with your referral link\n\nTotal Referals - {}</b>".format(message.from_user.mention, num_referrals))
