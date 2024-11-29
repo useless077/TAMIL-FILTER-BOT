@@ -54,7 +54,7 @@ async def start():
     temp.BANNED_USERS = b_users
     temp.BANNED_CHATS = b_chats
     me = await TamiliniBot.get_me()
-    temp.BOT = TechVJBot
+    temp.BOT = TamiliniBot
     temp.ME = me.id
     temp.U_NAME = me.username
     temp.B_NAME = me.first_name
