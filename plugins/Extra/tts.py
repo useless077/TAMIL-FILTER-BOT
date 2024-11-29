@@ -24,14 +24,14 @@ def convert(text):
 
 @Client.on_message(filters.command("tts"))
 async def text_to_speech(bot, message: Message):
-    vj = await bot.ask(chat_id = message.from_user.id, text = "Now send me your text.")
-    if vj.text:
-        m = await vj.reply_text("Processing")
-        text = vj.text
+    sk = await bot.ask(chat_id = message.from_user.id, text = "Now send me your text.")
+    if sk.text:
+        m = await sk.reply_text("Processing")
+        text = sk.text
         try:
             loop = get_running_loop()
             audio = await loop.run_in_executor(None, convert, text)
-            await vj.reply_audio(audio)
+            await sk.reply_audio(audio)
             await m.delete()
             audio.close()
         except Exception as e:
@@ -39,7 +39,7 @@ async def text_to_speech(bot, message: Message):
             e = traceback.format_exc()
             print(e)
     else:
-        await vj.reply_text("Send me only text Buddy.")
+        await sk.reply_text("Send me only text Buddy.")
 
 
 
