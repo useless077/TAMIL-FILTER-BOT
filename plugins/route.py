@@ -7,7 +7,7 @@ import re, math, logging, secrets, mimetypes, time
 from info import *
 from aiohttp import web
 from aiohttp.http_exceptions import BadStatusLine
-from Tamilini.bot import multi_clients, work_loads, TechVJBot
+from Tamilini.bot import multi_clients, work_loads, TamiliniBot
 from Tamilini.server.exceptions import FIleNotFound, InvalidHash
 from Tamilini import StartTime, __version__
 from Tamilini.util.custom_dl import ByteStreamer
