@@ -1,6 +1,6 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
+# Don't Remove Credit @tamilBots
+# Subscribe YouTube Channel For Amazing Bot @TamilBots
+# Ask Doubt on telegram @TamilSupport
 
 import asyncio
 import logging
@@ -11,7 +11,7 @@ from Tamilini.bot import multi_clients, work_loads, TamiliniBot
 
 
 async def initialize_clients():
-    multi_clients[0] = TechVJBot
+    multi_clients[0] = TamiliniBot
     work_loads[0] = 0
     all_tokens = TokenParser().parse_from_env()
     if not all_tokens:
