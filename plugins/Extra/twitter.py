@@ -1,6 +1,7 @@
 # Don't Remove Credit @TamilBots
-# Subscribe YouTube Channel For Amazing Bot @Tamilbots
+# Subscribe YouTube Channel For Amazing Bot @TamilBots
 # Ask Doubt on telegram @TamilSupport
+#Join our Movie channel @TownBus
 
 from pyrogram import filters,Client
 from info import LOG_CHANNEL as LOG_GROUP, REQST_CHANNEL as DUMP_GROUP
