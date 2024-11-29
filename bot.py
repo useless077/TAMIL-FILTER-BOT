@@ -22,7 +22,7 @@ from aiohttp import web
 from plugins import web_server
 from plugins.clone import restart_bots
 
-from Tamilini.bot import TechVJBot
+from Tamilini.bot import TamiliniBot
 from Tamilini.util.keepalive import ping_server
 from Tamilini.bot.clients import initialize_clients
 
