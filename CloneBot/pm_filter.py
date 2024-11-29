@@ -1,7 +1,6 @@
-# Don't Remove Credit @VJ_Botz
-# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
-# Ask Doubt on telegram @KingVJ01
-
+# Don't Remove Credit @tamilBots
+# Subscribe YouTube Channel For Amazing Bot @TamilBots
+# Ask Doubt on telegram @TamilSupport
 # Clone Code Credit : YT - @Tech_VJ / TG - @VJ_Bots / GitHub - @VJBots
 
 import os, logging, string, asyncio, time, re, ast, random, math, pytz, pyrogram
@@ -1028,16 +1027,16 @@ async def advantage_spell_chok(client, name, msg, reply_msg, sk_search):
     SPELL_CHECK[mv_id] = movielist
     if sk_search == True:
         sk_search_new = False
-        sk_ai_msg = await reply_msg.edit_text("<b><i>Tamilni Ai Of Tech VJ Try To Find Your Movie With Your Wrong Spelling.</i></b>")
+        sk_ai_msg = await reply_msg.edit_text("<b><i>Tamilni Ai Try To Find Your Movie With Your Wrong Spelling.</i></b>")
         movienamelist = []
         movienamelist += [movie.get('title') for movie in movies]
-        for techvj in movienamelist:
+        for techsk in movienamelist:
             try:
                 mv_rqst = mv_rqst.capitalize()
             except:
                 pass
-            if mv_rqst.startswith(techvj[0]):
-                await auto_filter(client, techvj, msg, reply_msg, vj_search_new)
+            if mv_rqst.startswith(techsk[0]):
+                await auto_filter(client, techsk, msg, reply_msg, sk_search_new)
                 break
         reqst_gle = mv_rqst.replace(" ", "+")
         button = [[
