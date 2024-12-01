@@ -2992,7 +2992,7 @@ async def advantage_spell_chok(client, msg):
             except:
                 pass
             if mv_rqst.startswith(namesk[0]):
-                await auto_filter(client, namesk, msg, sk_ai_msg)
+                await auto_filter(client, namesk, msg)
                 break
     else:
         btn = [
