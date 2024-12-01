@@ -27,7 +27,7 @@ PICS = (environ.get('PICS', 'https://graph.org/vTelegraphBot-11-04-5 https://env
 NOR_IMG = environ.get("NOR_IMG", "https://te.legra.ph/file/a27dc8fe434e6b846b0f8.jpg")
 MELCOW_VID = environ.get("MELCOW_VID", "https://t.me/saravanakrish/107")
 SPELL_IMG = environ.get("SPELL_IMG", "https://graph.org/file/789e3888ab16ce1a9a535.jpg")
-
+SPELL_IMG = environ.get("SPELL_IMG", "https://graph.org/file/789e3888ab16ce1a9a535.jpg")
 
 # Admins, Channels & Users
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002062053288'))
