@@ -2941,7 +2941,7 @@ async def auto_filter(client, name, msg, reply_msg, ai_search, spoll=False):
             await fuk.delete()
             await message.delete()
 
-async def advantage_spell_chok(client, name, msg, reply_msg, sk_search):
+async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
     mv_id = msg.id
     mv_rqst = name
     reqstr1 = msg.from_user.id if msg.from_user else 0
@@ -2981,17 +2981,17 @@ async def advantage_spell_chok(client, name, msg, reply_msg, sk_search):
     movielist += [f"{movie.get('title')} {movie.get('year')}" for movie in movies]
     SPELL_CHECK[mv_id] = movielist
     if AI_SPELL_CHECK == True and sk_search == True:
-        sk_search_new = False
+        vj_search_new = False
         sk_ai_msg = await reply_msg.edit_text("<b><i>Tamilini Ai Try To Find Your Movie With Your Wrong Spelling.</i></b>")
         movienamelist = []
         movienamelist += [movie.get('title') for movie in movies]
-        for techsk in movienamelist:
+        for techvj in movienamelist:
             try:
                 mv_rqst = mv_rqst.capitalize()
             except:
                 pass
-            if mv_rqst.startswith(techsk[0]):
-                await auto_filter(client, techsk, msg, reply_msg, sk_search_new)
+            if mv_rqst.startswith(techvj[0]):
+                await auto_filter(client, techvj, msg, reply_msg, vj_search_new)
                 break
         reqst_gle = mv_rqst.replace(" ", "+")
         button = [[
