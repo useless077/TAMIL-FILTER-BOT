@@ -82,16 +82,25 @@ async def is_subscribed(bot, query):
             logger.exception(e)
             return False
     else:
+    invite_links = []
+    for id in AUTH_CHANNEL:
         try:
-            user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
+            if userid == None and query != None:
+                chat = await bot.get_chat(id)
+                user = await bot.get_chat_member(id, query.from_user.id)
+            else:
+                chat = await bot.get_chat(id)
+                user = await bot.get_chat_member(AUTH_CHANNEL, int(userid))
         except UserNotParticipant:
-            pass
+            invite_links.append(chat.invite_link)
         except Exception as e:
             logger.exception(e)
+            continue
         else:
             if user.status != enums.ChatMemberStatus.BANNED:
-                return True
-        return False
+                continue
+
+    return invite_links
 
 async def get_poster(query, bulk=False, id=False, file=None):
     if not id:
