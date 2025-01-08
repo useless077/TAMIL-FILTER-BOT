@@ -3004,22 +3004,22 @@ async def advantage_spell_chok(client, name, msg, reply_msg, vj_search):
         await asyncio.sleep(30)
         await k.delete()
         return
-    else:
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=movie_name.strip(),
-                    callback_data=f"spol#{reqstr1}#{k}",
-                )
-            ]
-            for k, movie_name in enumerate(movielist)
-        ]
-        btn.append([InlineKeyboardButton(text="Close", callback_data=f'spol#{reqstr1}#close_spellcheck')])
-        x = await reply_msg.edit_text(text=script.CUDNT_FND.format(mv_rqst), reply_markup=InlineKeyboardMarkup(btn))
-        try:
-            if settings['auto_delete']:
-                await asyncio.sleep(600)
-                await x.delete()
+#    else:
+#        btn = [
+#            [
+#                InlineKeyboardButton(
+#                    text=movie_name.strip(),
+#                    callback_data=f"spol#{reqstr1}#{k}",
+#                )
+#            ]
+#            for k, movie_name in enumerate(movielist)
+#        ]
+#        btn.append([InlineKeyboardButton(text="Close", callback_data=f'spol#{reqstr1}#close_spellcheck')])
+#        x = await reply_msg.edit_text(text=script.CUDNT_FND.format(mv_rqst), reply_markup=InlineKeyboardMarkup(btn))
+#        try:
+#            if settings['auto_delete']:
+#                await asyncio.sleep(600)
+#                await x.delete()
         except KeyError:
             grpid = await active_connection(str(msg.from_user.id))
             await save_group_settings(grpid, 'auto_delete', True)
