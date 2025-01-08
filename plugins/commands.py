@@ -88,60 +88,38 @@ async def start(client, message):
         )
         return
     
-    if AUTH_CHANNEL and not await is_subscribed(client, message):
-        try:
-            if REQUEST_TO_JOIN_MODE == True:
-                invite_link = await client.create_chat_invite_link(chat_id=(int(AUTH_CHANNEL)), creates_join_request=True)
+    invite_links = await is_subscribed(client, query=message)
+    if AUTH_CHANNEL and len(invite_links) >= 1:
+        #this is written by tg: @programcrasher
+        btn = []
+        for chnl_num, link in enumerate(invite_links, start=1):
+            if chnl_num == 1:
+                channel_num = "1sᴛ"
+            elif chnl_num == 2:
+                channel_num = "2ɴᴅ"
+            elif chnl_num == 3:
+                channel_num = "3ʀᴅ"
             else:
-        invite_links = await is_subscribed(client, query=message)
-        if AUTH_CHANNEL and len(invite_links) >= 1:
-            #this is written by tg: @programcrasher
-            btn = []
-            for chnl_num, link in enumerate(invite_links, start=1):
-                if chnl_num == 1:
-                    channel_num = "1sᴛ"
-                elif chnl_num == 2:
-                    channel_num = "2ɴᴅ"
-                elif chnl_num == 3:
-                    channel_num = "3ʀᴅ"
-                else:
-                    channel_num = str(chnl_num)+"ᴛʜ"
-                btn.append([
-                    InlineKeyboardButton(f"❆ Jᴏɪɴ {channel_num} Cʜᴀɴɴᴇʟ ❆", url=link)
-                ])
+                channel_num = str(chnl_num)+"ᴛʜ"
+            btn.append([
+                InlineKeyboardButton(f"❆ Jᴏɪɴ {channel_num} Cʜᴀɴɴᴇʟ ❆", url=link)
+            ])
             
-            if message.command[1] != "subscribe":
-                if REQUEST_TO_JOIN_MODE == True:
-                    if TRY_AGAIN_BTN == True:
-                        try:
-                            kk, file_id = message.command[1].split("_", 1)
-                            btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
-                        except (IndexError, ValueError):
-                            btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-                else:
-                    try:
-                        kk, file_id = message.command[1].split("_", 1)
-                        btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
-                    except (IndexError, ValueError):
-                        btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
-            if REQUEST_TO_JOIN_MODE == True:
-                if TRY_AGAIN_BTN == True:
-                    text = "**🕵️ Jᴏɪɴ Tʜᴇ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Tᴏ Gᴇᴛ Mᴏᴠɪᴇ Fɪʟᴇ\n\n👨‍💻 Fɪʀsᴛ Cʟɪᴄᴋ Oɴ Jᴏɪɴ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Bᴜᴛᴛᴏɴ, Tʜᴇɴ Cʟɪᴄᴋ Oɴ Rᴇǫᴜᴇsᴛ Tᴏ Jᴏɪɴ Bᴜᴛᴛᴏɴ Aғᴛᴇʀ Cʟɪᴄᴋ Oɴ Tʀʏ Aɢᴀɪɴ Bᴜᴛᴛᴏɴ.**\n\nகீழே கொடுக்கப்பட்டுள்ள எங்கள் சேனலில் நீங்கள் இல்லை, அதனால் உங்களுக்கு திரைப்படம் கிடைக்கவில்லை...\n\nஉங்களுக்கு திரைப்படம் வேண்டுமென்றால், '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' என்பதைக் கிளிக் செய்து, எங்கள் சேனலில் சேரவும். பின்னர் கீழே உள்ள '🔄 Try Again' என்ற பட்டனை கிளிக் செய்து திரைப்படத்தைப் பெறுங்கள்...**"
-                else:
-                    await db.set_msg_command(message.from_user.id, com=message.command[1])
-                    text = "**🕵️ Jᴏɪɴ Tʜᴇ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Tᴏ Gᴇᴛ Mᴏᴠɪᴇ Fɪʟᴇ\n\n👨‍💻 Fɪʀsᴛ Cʟɪᴄᴋ Oɴ Jᴏɪɴ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Bᴜᴛᴛᴏɴ, Tʜᴇɴ Cʟɪᴄᴋ Oɴ Rᴇǫᴜᴇsᴛ Tᴏ Jᴏɪɴ Bᴜᴛᴛᴏɴ.**\n\nகீழே கொடுக்கப்பட்டுள்ள எங்கள் சேனலில் நீங்கள் இல்லை, அதனால் உங்களுக்கு திரைப்படம் கிடைக்கவில்லை...\n\nஉங்களுக்கு திரைப்படம் வேண்டுமென்றால், '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' என்பதைக் கிளிக் செய்து, எங்கள் சேனலில் சேரவும். பின்னர் கீழே உள்ள '🔄 Rᴇǫᴜᴇsᴛ Tᴏ Jᴏɪɴ' என்ற பட்டனை கிளிக் செய்து திரைப்படத்தைப் பெறுங்கள்...**"
-            else:
-                text = "**🕵️ Jᴏɪɴ Tʜᴇ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Tᴏ Gᴇᴛ Mᴏᴠɪᴇ Fɪʟᴇ\n\n👨‍💻 Fɪʀsᴛ  Cʟɪᴄᴋ Oɴ Jᴏɪɴ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Bᴜᴛᴛᴏɴ, Tʜᴇɴ Jᴏɪɴ Cʜᴀɴɴᴇʟ Aғᴛᴇʀ Cʟɪᴄᴋ Oɴ Tʀʏ Aɢᴀɪɴ Bᴜᴛᴛᴏɴ**\n\nகீழே கொடுக்கப்பட்டுள்ள எங்கள் சேனலில் நீங்கள் இல்லை, அதனால் உங்களுக்கு திரைப்படம் கிடைக்கவில்லை...\n\nஉங்களுக்கு திரைப்படம் வேண்டுமென்றால், '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' என்பதைக் கிளிக் செய்து, எங்கள் சேனலில் சேரவும். பின்னர் கீழே உள்ள '🔄 Try Again' என்ற பட்டனை கிளிக் செய்து திரைப்படத்தைப் பெறுங்கள்...**"
-            await client.send_message(
-                chat_id=message.from_user.id,
-                text=text,
-                reply_markup=InlineKeyboardMarkup(btn),
-                parse_mode=enums.ParseMode.MARKDOWN
+        if message.command[1] != "subscribe":
+            try:
+                kk, file_id = message.command[1].split("_", 1)
+                pre = 'checksubp' if kk == 'filep' else 'checksub' 
+                btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", callback_data=f"checksub#{kk}#{file_id}")])
+            except (IndexError, ValueError):
+                btn.append([InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", url=f"https://t.me/{temp.U_NAME}?start={message.command[1]}")])
+        await client.send_photo(
+            chat_id=message.from_user.id,
+            photo="https://telegra.ph/file/20b4aaaddb8aba646e53c.jpg",
+            caption="**You are not in our channel given below so you don't get the movie file...\n\nIf you want the movie file, click on the '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' button below and join our back-up channel, then click on the '🔄 Try Again' button below...\n\nThen you will get the movie files...**\n\nகீழே கொடுக்கப்பட்டுள்ள எங்கள் சேனலில் நீங்கள் இல்லை, அதனால் உங்களுக்கு திரைப்படம் கிடைக்கவில்லை...\n\nஉங்களுக்கு திரைப்படம் வேண்டுமென்றால், '🍿ᴊᴏɪɴ ᴏᴜʀ ʙᴀᴄᴋ-ᴜᴘ ᴄʜᴀɴɴᴇʟ🍿' என்பதைக் கிளிக் செய்து, எங்கள் சேனலில் சேரவும். பின்னர் கீழே உள்ள '🔄 Try Again' என்ற பட்டனை கிளிக் செய்து திரைப்படத்தைப் பெறுங்கள்...**",
+            reply_markup=InlineKeyboardMarkup(btn),
+            parse_mode=enums.ParseMode.MARKDOWN
             )
-            return
-        except Exception as e:
-            print(e)
-            return await message.reply_text("something wrong with force subscribe.")
+        return
             
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         if PREMIUM_AND_REFERAL_MODE == True:
